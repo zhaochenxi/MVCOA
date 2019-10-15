@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\MVCOA\bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -50,6 +50,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{d2dea39b-68f9-4140-8921-beba530adfc2}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DI\DI.csproj">
       <Project>{7ea7b1fb-784d-4117-b72a-b97f6822dfc1}</Project>
       <Name>DI</Name>

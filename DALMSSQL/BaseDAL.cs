@@ -18,7 +18,7 @@ namespace DALMSSQL
         /// <summary>
         /// EF上下文对象
         /// </summary>
-        MODEL.OuOAEntities db = new MODEL.OuOAEntities();
+        DbContext db = new DBContextFactory().GetDbContext(); // = new MODEL.OuOAEntities();
 
         #region 1.0 新增 实体 +int Add(T model)
         /// <summary>

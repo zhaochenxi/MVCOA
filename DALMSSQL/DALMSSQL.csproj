@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\MVCOA\bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -52,6 +52,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DAL.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBContextFactory.cs" />
+    <Compile Include="DBSession.cs" />
+    <Compile Include="DBSessionExtension.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBSessionExtension.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBSessionFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -68,6 +76,10 @@
     <Content Include="DAL.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>DAL.cs</LastGenOutput>
+    </Content>
+    <Content Include="DBSessionExtension.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DBSessionExtension.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>
