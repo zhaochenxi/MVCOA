@@ -13,6 +13,7 @@ namespace MVCOA.Logic
         /// 测试方法，读取所有的权限数据
         /// </summary>
         /// <returns></returns>
+        [HttpGet]
         public ActionResult Index()
         {
             List<MODEL.Ou_Permission> list = Helper.OperateContext.BLLSession.IOu_PermissionBLL.GetListBy(t => t.pIsDel == false);

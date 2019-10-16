@@ -136,6 +136,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\Admin\Login.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -164,6 +166,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -187,6 +190,10 @@
     <ProjectReference Include="..\MVCOA.Logic\MVCOA.Logic.csproj">
       <Project>{a6b04f6c-e07d-4045-ba82-6807630289cc}</Project>
       <Name>MVCOA.Logic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MVCOA.Login.Admin\MVCOA.Login.Admin.csproj">
+      <Project>{c1f97422-a3fd-4096-91d2-f529d2877325}</Project>
+      <Name>MVCOA.Login.Admin</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
