@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MODEL
+namespace IBLL
 {
-    public class Class1
+    public partial interface IOu_UserInfoBLL
     {
+        MODEL.Ou_UserInfo Login(string strName,string strPwd);
     }
 }

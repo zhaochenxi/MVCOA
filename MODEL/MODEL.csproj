@@ -68,7 +68,7 @@
     <Compile Include="Bill_Leave.cs">
       <DependentUpon>OuOA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Class1.cs" />
+    <Compile Include="FormatModel\AjaxMsgModel.cs" />
     <Compile Include="OuOA.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -133,7 +133,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DTOModel\" />
-    <Folder Include="FormatModel\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="OuOA.Context.tt">

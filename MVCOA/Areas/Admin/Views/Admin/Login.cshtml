@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
 
@@ -9,10 +8,32 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Login</title>
+    <style type="text/css">
+        #divMsg {
+            display: none;
+        }
+    </style>
+    @Scripts.Render("~/mvcAjax")
+    <script type="text/javascript" src="~/Scripts/jquery.msgProcess.js"></script>
+    <script type="text/javascript">
+        function Success(jsonData)
+        {
+            $.procAjaxData(jsonData, function (a) { window.location = jsonData.BackUrl; });
+        }
+    </script>
 </head>
 <body>
-    <div> 
-        登陆界面
-    </div>
+    @using (Ajax.BeginForm(new AjaxOptions()
+    {
+        HttpMethod = "post",
+        OnSuccess = "Success",
+        LoadingElementId = "divMsg"
+    }))
+    {
+        <input type="text" value="admin" name="txtName" />
+        <input type="password" value="123123" name="txtPwd" />
+        <input type="submit" value="登陆" />
+    }
+    <div id="divMsg">加载中~~~</div>
 </body>
 </html>

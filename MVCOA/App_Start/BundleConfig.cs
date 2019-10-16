@@ -25,6 +25,14 @@ namespace MVCOA
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/mvcAjax").Include(
+                      "~/Scripts/jquery-3.3.1.min.js",
+                      "~/Scripts/jquery.unobtrusive-ajax.min.js",
+                      "~/Scripts/jquery.validate.min.js",
+                      "~/Scripts/jquery.validate.unobtrusive.min.js"));
+
+            BundleTable.EnableOptimizations = true;
         }
     }
 }
