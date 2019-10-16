@@ -58,6 +58,10 @@
       <Project>{cd8c3dc2-c7a5-47db-93dc-1adfde7c7171}</Project>
       <Name>MODEL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MVCOA.Helper\MVCOA.Helper.csproj">
+      <Project>{0109f43a-079d-4a54-a2a2-88213c69f078}</Project>
+      <Name>MVCOA.Helper</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

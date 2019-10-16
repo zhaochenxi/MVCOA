@@ -48,6 +48,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IBLL.tt</DependentUpon>
     </Compile>
+    <Compile Include="IBLLSession.cs" />
+    <Compile Include="IBLLSessionExtension.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IBLLSessionExtension.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -64,6 +70,10 @@
     <Content Include="IBLL.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>IBLL.cs</LastGenOutput>
+    </Content>
+    <Content Include="IBLLSessionExtension.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IBLLSessionExtension.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

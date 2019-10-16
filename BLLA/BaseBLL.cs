@@ -40,15 +40,16 @@ namespace BLLA
             {
                 if (iDbSession == null)
                 {
-                    //1.读取配置文件
-                    string strFactoryDLL = Common.ConfigurationHelper.AppSetting("DBSessionFatoryDLL");
-                    string strFactoryType = Common.ConfigurationHelper.AppSetting("DBSessionFatory");
-                    //2.1通过反射创建 DBSessionFactory 工厂对象
-                    Assembly dalDLL = Assembly.LoadFrom(strFactoryDLL);
-                    Type typeDBSessionFatory = dalDLL.GetType(strFactoryType);
-                    IDAL.IDBSessionFactory sessionFactory = Activator.CreateInstance(typeDBSessionFatory) as IDAL.IDBSessionFactory;
+                    ////1.读取配置文件
+                    //string strFactoryDLL = Common.ConfigurationHelper.AppSetting("DBSessionFatoryDLL");
+                    //string strFactoryType = Common.ConfigurationHelper.AppSetting("DBSessionFatory");
+                    ////2.1通过反射创建 DBSessionFactory 工厂对象
+                    //Assembly dalDLL = Assembly.LoadFrom(strFactoryDLL);
+                    //Type typeDBSessionFatory = dalDLL.GetType(strFactoryType);
+                    //IDAL.IDBSessionFactory sessionFactory = Activator.CreateInstance(typeDBSessionFatory) as IDAL.IDBSessionFactory;
                     //2.根据配置文件内容 使用 DI层里的Spring.Net 创建 DBSessionFactory 工厂对象
 
+                    IDAL.IDBSessionFactory sessionFactory = DI.SpringHelper.GetObject<IDAL.IDBSessionFactory>("DBSessFactory");
 
                     //3.通过 工厂 创建 DBSession对象
                     iDbSession = sessionFactory.GetDBSession();

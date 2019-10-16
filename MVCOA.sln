@@ -33,6 +33,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DI", "DI\DI.csproj", "{7EA7
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{D2DEA39B-68F9-4140-8921-BEBA530ADFC2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00Schemal", "00Schemal", "{7BEF0F7A-9C62-4022-A7CE-9ECF49C324AE}"
+	ProjectSection(SolutionItems) = preProject
+		Libs\spring-objects-1.3.xsd = Libs\spring-objects-1.3.xsd
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCOA.Helper", "MVCOA.Helper\MVCOA.Helper.csproj", "{0109F43A-079D-4A54-A2A2-88213C69F078}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +90,10 @@ Global
 		{D2DEA39B-68F9-4140-8921-BEBA530ADFC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2DEA39B-68F9-4140-8921-BEBA530ADFC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2DEA39B-68F9-4140-8921-BEBA530ADFC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0109F43A-079D-4A54-A2A2-88213C69F078}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0109F43A-079D-4A54-A2A2-88213C69F078}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0109F43A-079D-4A54-A2A2-88213C69F078}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0109F43A-079D-4A54-A2A2-88213C69F078}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -99,6 +110,7 @@ Global
 		{CD8C3DC2-C7A5-47DB-93DC-1ADFDE7C7171} = {58768F52-4BDA-4553-BE91-D881AE5243DB}
 		{7EA7B1FB-784D-4117-B72A-B97F6822DFC1} = {58768F52-4BDA-4553-BE91-D881AE5243DB}
 		{D2DEA39B-68F9-4140-8921-BEBA530ADFC2} = {58768F52-4BDA-4553-BE91-D881AE5243DB}
+		{0109F43A-079D-4A54-A2A2-88213C69F078} = {3154D496-3115-4B1F-954B-121A4EF32AA1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {934FED87-1E95-468C-B90A-4A99C07DD422}

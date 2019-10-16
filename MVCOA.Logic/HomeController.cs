@@ -15,8 +15,7 @@ namespace MVCOA.Logic
         /// <returns></returns>
         public ActionResult Index()
         {
-            IBLL.IOu_PermissionBLL bll = null;
-            List<MODEL.Ou_Permission> list = bll.GetListBy(t => t.pIsDel == false);
+            List<MODEL.Ou_Permission> list = Helper.OperateContext.BLLSession.IOu_PermissionBLL.GetListBy(t => t.pIsDel == false);
             return View(list);
         }
     }

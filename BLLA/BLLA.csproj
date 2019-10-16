@@ -47,6 +47,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BLL.tt</DependentUpon>
     </Compile>
+    <Compile Include="BLLSession.cs" />
+    <Compile Include="BLLSessionExtension.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BLLSessionExtension.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -75,6 +81,10 @@
     <Content Include="BLL.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>BLL.cs</LastGenOutput>
+    </Content>
+    <Content Include="BLLSessionExtension.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>BLLSessionExtension.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>
