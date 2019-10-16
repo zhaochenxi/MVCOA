@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
 
 namespace MVCOA.Login.Admin
@@ -43,6 +44,22 @@ namespace MVCOA.Login.Admin
             
             if ( usr != null)
             {
+                //保存用户数据到session里
+                Session["ainfo"] = usr;
+
+                //用cookie记住登陆数据
+                if (!string.IsNullOrEmpty(form["isAllway"]))
+                {
+                    //将用户id加密成字符串
+                    string strCookieValue = Common.SecurityHelper.EncryptUserInfo(usr.uId.ToString());
+                    //创建Cookie
+                    HttpCookie cookie = new HttpCookie("ainfo", strCookieValue);
+                    cookie.Expires = DateTime.Now.AddDays(1);
+                    cookie.Path = "/admin/";
+                    Response.Cookies.Add(cookie);
+
+                }
+
                 ajaxM.Statu = "ok";
                 ajaxM.Msg = "登陆成功";
                 ajaxM.BackUrl = "/admin/admin/index";
