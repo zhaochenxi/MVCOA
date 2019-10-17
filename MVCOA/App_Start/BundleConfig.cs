@@ -30,7 +30,21 @@ namespace MVCOA
                       "~/Scripts/jquery-3.3.1.min.js",
                       "~/Scripts/jquery.unobtrusive-ajax.min.js",
                       "~/Scripts/jquery.validate.min.js",
-                      "~/Scripts/jquery.validate.unobtrusive.min.js"));
+                      "~/Scripts/jquery.validate.unobtrusive.min.js",
+                      "~/Scripts/jquery.msgProcess.js"
+                      ));
+
+            bundles.Add(new ScriptBundle("~/easyUIJS").Include(
+                      "~/Scripts/jquery.min.js",
+                      "~/EasyUI/jquery.easyui.min.js",
+                      "~/Scripts/jquery.msgProcess.js",
+                      "~/EasyUI/easyui-lang-zh_CN.js"
+                      ));
+
+            bundles.Add(new StyleBundle("~/easyUICSS").Include(
+                      "~/EasyUI/themes/icon.css",
+                      "~/EasyUI/themes/default/easyui.css"
+                      ));
 
             BundleTable.EnableOptimizations = true;
         }

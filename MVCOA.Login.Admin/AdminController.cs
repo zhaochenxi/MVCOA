@@ -59,6 +59,9 @@ namespace MVCOA.Login.Admin
                     Response.Cookies.Add(cookie);
 
                 }
+                //查询当前用户权限，并将权限存入Session
+                List<MODEL.Ou_Permission> listPers = Helper.OperateContext.GetUserPermission(usr.uId);
+                Session["uPermission"] = listPers;
 
                 ajaxM.Statu = "ok";
                 ajaxM.Msg = "登陆成功";

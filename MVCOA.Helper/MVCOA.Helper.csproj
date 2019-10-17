@@ -53,6 +53,10 @@
       <Project>{19bbf931-9b15-499d-8f3c-5eca8a205d90}</Project>
       <Name>IBLL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MODEL\MODEL.csproj">
+      <Project>{cd8c3dc2-c7a5-47db-93dc-1adfde7c7171}</Project>
+      <Name>MODEL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
