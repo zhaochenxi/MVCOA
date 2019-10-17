@@ -11,10 +11,27 @@
     <title>Index</title>
     @Styles.Render("~/easyUICSS")
     @Scripts.Render("~/easyUIJS")
+    <script type="text/javascript">
+        $(function() {
+            $("#btnTest").click(function () {
+                //1.加载菜单树
+                $("#menuTree").tree({
+                    url: '/admin/admin/getMenuData', onLoadSuccess: function (node, data) {
+                        //调用方法 统一处理 Ajax获取的 json数据
+                        $.procAjaxData(data);
+                    }
+                })
+            })
+        })
+    </script>
 </head>
-<body>
-    <div> 
-
+<body class="easyui-layout">
+    <div data-options="region:'north',split:true" style="height:100px;"></div>
+    <div data-options="region:'west',title:'菜单导航',split:true" style="width:240px;">
+        <ul id="menuTree"></ul>
+    </div>
+    <div data-options="region:'center'" style="padding:5px;background:#eee;">
+        <input type="button" id="btnTest" />
     </div>
 </body>
 </html>

@@ -1,4 +1,5 @@
-﻿@{
+﻿@model MODEL.ViewModel.LoginUser
+@{
     Layout = null;
 }
 
@@ -16,8 +17,7 @@
     @Scripts.Render("~/mvcAjax")
     <script type="text/javascript" src="~/Scripts/jquery.msgProcess.js"></script>
     <script type="text/javascript">
-        function Success(jsonData)
-        {
+        function Success(jsonData) {
             $.procAjaxData(jsonData, function (a) { window.location = jsonData.BackUrl; });
         }
     </script>
@@ -30,10 +30,22 @@
         LoadingElementId = "divMsg"
     }))
     {
-        <input type="text" value="admin" name="txtName" />
-        <input type="password" value="123123" name="txtPwd" />
-        <input type="checkbox" name="isAllway" value="1" />
-        <input type="submit" value="登陆" />
+        <table>
+            <tr>
+                <td>用户名：</td>
+                <td>@Html.TextBoxFor(u => u.LoginName, new { Value = "admin" })</td>
+                <td>@Html.ValidationMessageFor(u => u.LoginName)</td>
+            </tr>
+            <tr>
+                <td>密码：</td>
+                <td>@Html.PasswordFor(u => u.Pwd, new { value = "123123" })</td>
+                <td>@Html.ValidationMessageFor(u => u.Pwd)</td>
+            </tr>
+            <tr>
+                <td>@Html.CheckBoxFor(u => u.IsAlways)</td>
+                <td colspan="2"><input type="submit" value="登陆" /></td>
+            </tr>
+        </table>
     }
     <div id="divMsg">加载中~~~</div>
 </body>

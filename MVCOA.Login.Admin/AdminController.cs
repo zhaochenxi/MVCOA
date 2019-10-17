@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using MVCOA.Helper;
+using Common.Attributes;
 
 namespace MVCOA.Login.Admin
 {
@@ -13,12 +15,13 @@ namespace MVCOA.Login.Admin
     /// </summary>
     public class AdminController : Controller
     {
-        #region 1.0 管理员登陆页面 + ActionResult Login()
+        #region 1.0 管理员登陆页面 +ActionResult Login()
         /// <summary>
         /// 1.0 管理员登陆页面
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [Skip]
         public ActionResult Login()
         {
             return View();
@@ -26,54 +29,56 @@ namespace MVCOA.Login.Admin
         #endregion
 
 
+        #region 1.0 管理员登陆页面 +ActionResult Login()
+        /// <summary>
+        /// 1.0 管理员登陆页面
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
-        public ActionResult Login(FormCollection form)
+        [Skip]
+        public ActionResult Login(MODEL.ViewModel.LoginUser usrInfo)
         {
-            MODEL.FormatModel.AjaxMsgModel ajaxM = new MODEL.FormatModel.AjaxMsgModel()
+            System.Threading.Thread.Sleep(2000);
+            //1.2服务器端验证，如果没有验证通过
+            if (!ModelState.IsValid)
             {
-                Statu = "err",
-                Msg = "登陆失败"
-            };
-
-            //获取数据
-            string strName = form["txtName"];
-            string strPwd = form["txtPwd"];
-            //验证
-            //通过操作上下位获取用户业务接口对象，调用里面的登陆方法！
-            MODEL.Ou_UserInfo usr = Helper.OperateContext.BLLSession.IOu_UserInfoBLL.Login(strName, strPwd);
-            
-            if ( usr != null)
-            {
-                //保存用户数据到session里
-                Session["ainfo"] = usr;
-
-                //用cookie记住登陆数据
-                if (!string.IsNullOrEmpty(form["isAllway"]))
-                {
-                    //将用户id加密成字符串
-                    string strCookieValue = Common.SecurityHelper.EncryptUserInfo(usr.uId.ToString());
-                    //创建Cookie
-                    HttpCookie cookie = new HttpCookie("ainfo", strCookieValue);
-                    cookie.Expires = DateTime.Now.AddDays(1);
-                    cookie.Path = "/admin/";
-                    Response.Cookies.Add(cookie);
-
-                }
-                //查询当前用户权限，并将权限存入Session
-                List<MODEL.Ou_Permission> listPers = Helper.OperateContext.GetUserPermission(usr.uId);
-                Session["uPermission"] = listPers;
-
-                ajaxM.Statu = "ok";
-                ajaxM.Msg = "登陆成功";
-                ajaxM.BackUrl = "/admin/admin/index";
+                return OperateContext.Current.RedirectAjax("err", "没有权限!", null, "");
             }
-            
-            return Json(ajaxM);
+            if (OperateContext.Current.LoginAdmin(usrInfo))
+            {
+                return OperateContext.Current.RedirectAjax("ok", "登陆成功~", null, "/admin/admin/index");
+            }
+            else
+            {
+                return OperateContext.Current.RedirectAjax("err", "失败~~!", null, "");
+            }
         }
+        #endregion
 
-        [HttpGet]
+
+        #region 2.0 显示管理首页 +ActionResult Index()
+        /// <summary>
+        /// 2.0 显示管理首页
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
-        { return View(); }
+        {
+            return View();
+        }
+        #endregion
 
+        #region 3.0 根据当前登陆用户 权限 生成菜单 +GetMenuData()
+        /// <summary>
+        /// 根据当前登陆用户 权限 生成菜单
+        /// </summary>
+        /// <returns></returns>
+        [AjaxRequest]
+        public ActionResult GetMenuData()
+        {
+            //MODEL.EasyUIModel.Tree tree = Helper.OperateContext.CurUserPermission;
+            return Content(OperateContext.Current.UsrTreeJsonStr);
+            //return Content("{\"data\":[{\"id\":1,\"text\":\"后台菜单导航\",\"state\":\"open\",\"attributes\":null,\"children\":[{\"id\":2,\"text\":\"系统管理\",\"Checked\":false}]}]}");
+        }
+        #endregion
     }
 }

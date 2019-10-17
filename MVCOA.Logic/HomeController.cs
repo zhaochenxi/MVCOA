@@ -16,7 +16,7 @@ namespace MVCOA.Logic
         [HttpGet]
         public ActionResult Index()
         {
-            List<MODEL.Ou_Permission> list = Helper.OperateContext.BLLSession.IOu_PermissionBLL.GetListBy(t => t.pIsDel == false);
+            List<MODEL.Ou_Permission> list = Helper.OperateContext.Current.BLLSession.IOu_PermissionBLL.GetListBy(t => t.pIsDel == false);
             return View(list);
         }
     }
