@@ -38,7 +38,6 @@ namespace MVCOA.Login.Admin
         [Skip]
         public ActionResult Login(MODEL.ViewModel.LoginUser usrInfo)
         {
-            System.Threading.Thread.Sleep(2000);
             //1.2服务器端验证，如果没有验证通过
             if (!ModelState.IsValid)
             {
