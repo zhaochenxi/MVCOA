@@ -470,6 +470,8 @@
     <Content Include="EasyUI\themes\default\images\Thumbs.db" />
     <Content Include="EasyUI\themes\gray\images\Thumbs.db" />
     <Content Include="EasyUI\themes\metro\images\Thumbs.db" />
+    <Content Include="Areas\Admin\Views\Sys\Permission.cshtml" />
+    <Content Include="Areas\Admin\Views\Sys\EditPermission.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

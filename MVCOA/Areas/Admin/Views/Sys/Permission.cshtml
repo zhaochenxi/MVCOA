@@ -1,0 +1,113 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>123</title>
+    <link href="~/EasyUI/themes/icon.css" rel="stylesheet" />
+    <link href="~/EasyUI/themes/default/easyui.css" rel="stylesheet" />
+    <script type="text/javascript" src="~/Scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="~/EasyUI/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#editWindow').window('close');
+            $("#tbList").datagrid({
+                width: 'auto',
+                height: 300,
+                striped: true,
+                singleSelect: true,
+                url: '/admin/sys/GetPermData',
+                queryParams:{},
+                loadMsg: '数据加载中请稍后……',
+                pagination: true,
+                rownumbers: true,
+                columns: [[
+                    { field: 'pid', title: 'ID', width: 100},
+                    { field: 'pName', title: '权限名', width: 100 },
+                    { field: 'pAreaName', title: '区域名', width: 100 },
+                    { field: 'pControllerName', title: '控制名', width: 100 },
+                    { field: 'pActionName', title: 'Action', width: 100 },
+                    { field: 'pFormMethod', title: '请求方式', width: 100, align: "center", formatter: function (value) {
+                            return value == "1" ? "Get" : "Post";}
+                    },
+                    { field: 'pOperationType', title: '操作类型', width: 100 }
+                ]],
+                toolbar: [{
+                    iconCls: 'icon-edit',
+                    text:"编辑",
+                    handler: editRow
+                }, '-', {
+                    iconCls: 'icon-add',
+                    text: "新增",
+                    handler: function () { alert('新增按钮') }
+                }],
+                onSelect: function (rowI, rowD) {
+                    selectedRowIndex = rowI;//将选中行的下标 设置给全局变量
+                }
+
+            });
+
+            initModifyForm();
+        })
+
+        //为表单 设置 参数
+        function initModifyForm()
+        {
+            //$('#modifyForm').form({
+            //    url: "/admin/sys/editpermission",
+            //    //onSubmit: function () {
+
+            //    //},
+            //    success: function (data) {
+            //        alert(data)
+            //    }
+            //});
+        }
+
+        //选中行的下标
+        var selectedRowIndex = -1;
+
+        //编辑按钮方法
+        function editRow()
+        {
+            //获取选中行里的数据！
+            var rowData = $("#tbList").datagrid("getSelected");
+            $('#editWindow').window('open');
+            //异步请求 权限修改页面，并直接加载到 当前的 修改窗体中
+            $("#modifyForm").load("/admin/sys/editpermission/" + rowData.pid, null, function () {
+
+            });
+
+        }
+
+
+        // submit the form
+        $('#ff').submit();
+    </script>
+</head>
+<body>
+    <table id="tbList" style="width:400px;height:250px">
+    </table>
+
+    <div id="editWindow" class="easyui-window" title="My Window" style="width:600px;height:400px;"
+         data-options="iconCls:'icon-save',modal:true">
+        <form id="modifyForm" method="post">
+        </form>
+    </div>
+
+</body>
+</html>
+<!--
+            ////获取所有选中行 的数据
+            //var $selectedRows = $("#tbList").datagrid("getSelections");
+
+            ////获取选中行的下标
+            ////alert(selectedRowIndex);
+            ////$("#tbList").datagrid("selectRow", 7);
+
+            ////想获取 选中行的 对象，没想到办法！
+-->

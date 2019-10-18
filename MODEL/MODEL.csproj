@@ -68,6 +68,7 @@
     <Compile Include="Bill_Leave.cs">
       <DependentUpon>OuOA.tt</DependentUpon>
     </Compile>
+    <Compile Include="EasyUIModel\DataGridModel.cs" />
     <Compile Include="EasyUIModel\Tree.cs" />
     <Compile Include="EasyUIModel\TreeNode.cs" />
     <Compile Include="ExtensionModel\Ou_Permission.cs" />

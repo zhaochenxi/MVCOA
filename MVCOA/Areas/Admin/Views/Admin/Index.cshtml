@@ -14,7 +14,7 @@
     @Scripts.Render("~/easyUIJS")
     <script type="text/javascript">
         $(function () {
-            $("#btnTest").click(function () {
+            
                 //1.加载菜单树
                 $("#menuTree").tree({
                     url: '/admin/admin/getMenuData', onLoadSuccess: function (node, data) {
@@ -24,7 +24,7 @@
                         newTab(node);
                     }
                 })
-            })
+            
         })
         function newTab(treeNode) {
             var $tbs = $("#tbs");//获取tab容器
