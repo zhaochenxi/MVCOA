@@ -41,8 +41,10 @@ namespace MVCOA
                       "~/EasyUI/easyui-lang-zh_CN.js"
                       ));
 
-            bundles.Add(new StyleBundle("~/easyUICSS").Include(
-                      "~/EasyUI/themes/icon.css",
+            bundles.Add(new StyleBundle("~/EasyUI/themes/css1").Include(
+                      "~/EasyUI/themes/icon.css"
+                      ));
+            bundles.Add(new StyleBundle("~/EasyUI/themes/default/css2").Include(
                       "~/EasyUI/themes/default/easyui.css"
                       ));
 

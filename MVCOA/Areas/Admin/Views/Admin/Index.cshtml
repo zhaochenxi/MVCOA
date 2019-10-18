@@ -9,8 +9,8 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
-    <link href="~/EasyUI/themes/icon.css" rel="stylesheet" />
-    <link href="~/EasyUI/themes/default/easyui.css" rel="stylesheet" />
+    @Styles.Render("~/EasyUI/themes/css1")
+    @Styles.Render("~/EasyUI/themes/default/css2")
     @Scripts.Render("~/easyUIJS")
     <script type="text/javascript">
         $(function () {
@@ -28,7 +28,7 @@
         })
         function newTab(treeNode) {
             var $tbs = $("#tbs");//获取tab容器
-            //新根据 标题 判断 是否以存在 同名tab
+            //新根据 标题 判断 是否已存在 同名tab
             if ($tbs.tabs("exists", treeNode.text)) {
                 $tbs.tabs("select", treeNode.text);
             } else {
@@ -40,8 +40,7 @@
             }
         }
         /*返回一个iframe标签*/
-        function newIframe(url)
-        {
+        function newIframe(url) {
             var ifrStr = "<iframe src='" + url + "' style='width:100%;height:100%;border:1px solid #000;'></iframe>";
             return ifrStr;
         }
