@@ -17,7 +17,7 @@
             $('#editWindow').window('close');
             $("#tbList").datagrid({
                 width: 'auto',
-                height: 300,
+                height: 400,
                 striped: true,
                 singleSelect: true,
                 url: '/admin/sys/GetPermData',
@@ -78,15 +78,13 @@
             var rowData = $("#tbList").datagrid("getSelected");
             $('#editWindow').window('open');
             //异步请求 权限修改页面，并直接加载到 当前的 修改窗体中
-            $("#modifyForm").load("/admin/sys/editpermission/" + rowData.pid, null, function () {
-
-            });
+            $("#editWindow").load("/admin/sys/editpermission/" + rowData.pid);
 
         }
 
 
         // submit the form
-        $('#ff').submit();
+        //$('#ff').submit();
     </script>
 </head>
 <body>
@@ -95,8 +93,8 @@
 
     <div id="editWindow" class="easyui-window" title="My Window" style="width:600px;height:400px;"
          data-options="iconCls:'icon-save',modal:true">
-        <form id="modifyForm" method="post">
-        </form>
+        @*<form id="modifyForm" method="post">
+        </form>*@
     </div>
 
 </body>
