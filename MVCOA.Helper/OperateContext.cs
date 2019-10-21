@@ -234,7 +234,8 @@ namespace MVCOA.Helper
                             string.Equals(per.pAreaName, areaName, StringComparison.CurrentCultureIgnoreCase) &&
                             string.Equals(per.pControllerName, controllerName, StringComparison.CurrentCultureIgnoreCase) &&
                             string.Equals(per.pActionName, actionName, StringComparison.CurrentCultureIgnoreCase) &&
-                            per.pFormMethod == (httpMethod.ToLower() == "get" ? 1 : 2)
+                            per.pFormMethod == 3 ||//如果数据库保存的权限 请求方式 =3 代表允许 get/post请求
+                                per.pFormMethod == (httpMethod.ToLower() == "get" ? 1 : 2)
                         select per;
             return listP.Count() > 0;
         }

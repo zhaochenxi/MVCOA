@@ -10,7 +10,7 @@
     <script type="text/javascript" src="~/Scripts/jquery.min.js"></script>
     <script type="text/javascript" src="~/EasyUI/jquery.easyui.min.js"></script>
     <script type="text/javascript" src="~/Scripts/jquery.validate.min.js"></script>
-    <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    @*<script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
 
     <script type="text/javascript">
         $(function () {
@@ -23,8 +23,10 @@
                 url: '/admin/sys/GetPermData',
                 queryParams:{},
                 loadMsg: '数据加载中请稍后……',
-                pagination: true,
-                rownumbers: true,
+                pagination: true,//启用分页。默认每页10行
+                rownumbers: true,//显示页码。默认提供10-50的页容量选择
+                pageSize: 5,//默认的页容量，此页容量需要在pageList内选择
+                pageList:[5,10],//页容量下拉框选项
                 columns: [[
                     { field: 'pid', title: 'ID', width: 100},
                     { field: 'pName', title: '权限名', width: 100 },
@@ -43,7 +45,7 @@
                 }, '-', {
                     iconCls: 'icon-add',
                     text: "新增",
-                    handler: function () { alert('新增按钮') }
+                    handler: addRow
                 }],
                 onSelect: function (rowI, rowD) {
                     selectedRowIndex = rowI;//将选中行的下标 设置给全局变量
@@ -81,7 +83,14 @@
             $("#editWindow").load("/admin/sys/editpermission/" + rowData.pid);
 
         }
+        
+        //新增按钮方法
+        function addRow()
+        {
+            $('#editWindow').window('open');
+            $("#editWindow").load("/admin/sys/addpermission/");
 
+        }
 
         // submit the form
         //$('#ff').submit();

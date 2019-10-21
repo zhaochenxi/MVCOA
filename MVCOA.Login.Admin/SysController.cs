@@ -32,10 +32,17 @@ namespace MVCOA.Login.Admin
         /// <returns></returns>
         public ActionResult GetPermData()
         {
+            //获取页容量
+            int pageSize = int.Parse(Request.Form["rows"]);
+            //获取请求页码
+            int pageIndex = int.Parse(Request.Form["page"]);
+
             //1 查询数据
-            var list = OperateContext.Current.BLLSession.IOu_PermissionBLL.GetListBy(p => p.pIsDel == false).Select(p => p.ToPOCO());
+            //var list = OperateContext.Current.BLLSession.IOu_PermissionBLL.GetListBy(p => p.pIsDel == false).Select(p => p.ToPOCO());
+            //查询分页数据
+            var list = OperateContext.Current.BLLSession.IOu_PermissionBLL.GetPagedList(pageIndex,pageSize,p => p.pIsDel == false,p => p.pid).Select(p => p.ToPOCO());
+            int rowCount = OperateContext.Current.BLLSession.IOu_PermissionBLL.GetListBy(p => p.pIsDel == false).Count();
             //2 生成规定格式的 json字符串发回 给 异步对象
-            //return OperateContext.Current.RedirectAjax("ok", "加载成功~", list, "");
             MODEL.EasyUIModel.DataGridModel dgModel = new MODEL.EasyUIModel.DataGridModel()
             {
                 total = list.Count(),
@@ -57,20 +64,7 @@ namespace MVCOA.Login.Admin
             //根据id查询要修改的权限
             var model = OperateContext.Current.BLLSession.IOu_PermissionBLL.GetListBy(p => p.pid == id).FirstOrDefault().ToViewModel();
 
-            //准备请求方式下拉框数据
-            ViewBag.httpMethodList = new List<SelectListItem>() {
-             new SelectListItem(){ Text="Get",Value="1"},
-             new SelectListItem(){ Text="Post",Value="2"}
-            };
-
-            /*
-             0-无操作 1-easyui连接 2-打开新窗体
-             */
-            ViewBag.operationList = new List<SelectListItem>() {
-             new SelectListItem(){ Text="无操作",Value="0"},
-             new SelectListItem(){ Text="easyui连接",Value="1"},
-             new SelectListItem(){ Text="打开新窗体",Value="2"}
-            };
+            SetDropDonwList();
 
             //将 权限对象 传给 视图 的 Model属性
             return PartialView(model);
@@ -93,5 +87,60 @@ namespace MVCOA.Login.Admin
                 return Redirect("/admin/sys/Permission?err");
         }
         #endregion
+
+        #region 1.3 新增权限 +AddPermission()
+        [HttpPost]
+        /// <summary>
+        /// 新增权限
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult AddPermission(MODEL.Ou_Permission model)
+        {
+            model.pIsDel = false;
+            model.pAddTime = DateTime.Now;
+
+            int res = OperateContext.Current.BLLSession.IOu_PermissionBLL.Add(model);
+
+            if (res > 0)
+                return Redirect("/admin/sys/Permission?ok");
+            else
+                return Redirect("/admin/sys/Permission?err");
+        }
+        #endregion
+
+        /// <summary>
+        /// 显示 新增权限 表单
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult AddPermission()
+        {
+            SetDropDonwList();
+            return PartialView("EditPermission");
+        }
+
+
+        //------------------------------------------
+        /// <summary>
+        /// 设置新增和修改通用的下拉框数据
+        /// </summary>
+        void SetDropDonwList()
+        {
+            //准备请求方式下拉框数据
+            ViewBag.httpMethodList = new List<SelectListItem>() {
+             new SelectListItem(){ Text="Get",Value="1"},
+             new SelectListItem(){ Text="Post",Value="2"},
+             new SelectListItem(){ Text="Both",Value="3"}
+            };
+
+            /*
+             0-无操作 1-easyui连接 2-打开新窗体
+             */
+            ViewBag.operationList = new List<SelectListItem>() {
+             new SelectListItem(){ Text="无操作",Value="0"},
+             new SelectListItem(){ Text="easyui连接",Value="1"},
+             new SelectListItem(){ Text="打开新窗体",Value="2"}
+            };
+        }
     }
 }
