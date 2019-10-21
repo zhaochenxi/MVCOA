@@ -33,10 +33,31 @@
                     { field: 'pAreaName', title: '区域名', width: 100 },
                     { field: 'pControllerName', title: '控制名', width: 100 },
                     { field: 'pActionName', title: 'Action', width: 100 },
-                    { field: 'pFormMethod', title: '请求方式', width: 100, align: "center", formatter: function (value) {
-                            return value == "1" ? "Get" : "Post";}
+                    {
+                        field: 'pFormMethod', title: '请求方式', width: 100, align: "center",
+                        formatter: function (value) {
+                            switch (value.toString()) {
+                                case "1":
+                                    return "Get";
+                                case "2":
+                                    return "Post";
+                                case "3":
+                                    return "Both";
+                            }
+                        }
                     },
-                    { field: 'pOperationType', title: '操作类型', width: 100 }
+                    { 
+                        field: 'pOperationType', title: '操作类型', width: 100,
+                        formatter: function (value) {
+                            switch (value.toString()) {
+                                case "0":
+                                    return "无操作";
+                                case "1":
+                                    return "easyui连接";
+                                case "2":
+                                    return "打开新窗体";
+                            }
+                        } }
                 ]],
                 toolbar: [{
                     iconCls: 'icon-edit',
@@ -46,6 +67,10 @@
                     iconCls: 'icon-add',
                     text: "新增",
                     handler: addRow
+                }],'-', {
+                    iconCls: 'icon-remove',
+                    text: "删除",
+                    handler: removeRow
                 }],
                 onSelect: function (rowI, rowD) {
                     selectedRowIndex = rowI;//将选中行的下标 设置给全局变量
@@ -78,9 +103,11 @@
         {
             //获取选中行里的数据！
             var rowData = $("#tbList").datagrid("getSelected");
-            $('#editWindow').window('open');
-            //异步请求 权限修改页面，并直接加载到 当前的 修改窗体中
-            $("#editWindow").load("/admin/sys/editpermission/" + rowData.pid);
+            if (rowData) {
+                $('#editWindow').window('open');
+                //异步请求 权限修改页面，并直接加载到 当前的 修改窗体中
+                $("#editWindow").load("/admin/sys/editpermission/" + rowData.pid);
+            }
 
         }
         
