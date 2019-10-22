@@ -10,6 +10,7 @@
     <script type="text/javascript" src="~/Scripts/jquery.min.js"></script>
     <script type="text/javascript" src="~/EasyUI/jquery.easyui.min.js"></script>
     <script type="text/javascript" src="~/Scripts/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.msgProcess.js"></script>
     @*<script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
 
     <script type="text/javascript">
@@ -21,14 +22,14 @@
                 striped: true,
                 singleSelect: true,
                 url: '/admin/sys/GetPermData',
-                queryParams:{},
+                queryParams: {},
                 loadMsg: '数据加载中请稍后……',
                 pagination: true,//启用分页。默认每页10行
                 rownumbers: true,//显示页码。默认提供10-50的页容量选择
                 pageSize: 5,//默认的页容量，此页容量需要在pageList内选择
-                pageList:[5,10],//页容量下拉框选项
+                pageList: [5, 10],//页容量下拉框选项
                 columns: [[
-                    { field: 'pid', title: 'ID', width: 100},
+                    { field: 'pid', title: 'ID', width: 100 },
                     { field: 'pName', title: '权限名', width: 100 },
                     { field: 'pAreaName', title: '区域名', width: 100 },
                     { field: 'pControllerName', title: '控制名', width: 100 },
@@ -46,7 +47,7 @@
                             }
                         }
                     },
-                    { 
+                    {
                         field: 'pOperationType', title: '操作类型', width: 100,
                         formatter: function (value) {
                             switch (value.toString()) {
@@ -57,17 +58,18 @@
                                 case "2":
                                     return "打开新窗体";
                             }
-                        } }
+                        }
+                    }
                 ]],
                 toolbar: [{
                     iconCls: 'icon-edit',
-                    text:"编辑",
+                    text: "编辑",
                     handler: editRow
                 }, '-', {
                     iconCls: 'icon-add',
                     text: "新增",
                     handler: addRow
-                }],'-', {
+                }, '-', {
                     iconCls: 'icon-remove',
                     text: "删除",
                     handler: removeRow
@@ -82,8 +84,7 @@
         })
 
         //为表单 设置 参数
-        function initModifyForm()
-        {
+        function initModifyForm() {
             //$('#modifyForm').form({
             //    url: "/admin/sys/editpermission",
             //    //onSubmit: function () {
@@ -99,28 +100,54 @@
         var selectedRowIndex = -1;
 
         //编辑按钮方法
-        function editRow()
-        {
+        function editRow() {
             //获取选中行里的数据！
             var rowData = $("#tbList").datagrid("getSelected");
             if (rowData) {
                 $('#editWindow').window('open');
                 //异步请求 权限修改页面，并直接加载到 当前的 修改窗体中
-                $("#editWindow").load("/admin/sys/editpermission/" + rowData.pid);
+                //$("#editWindow").load("/admin/sys/editpermission/" + rowData.pid, function (jsonData) {
+
+                //});
+                $.get("/admin/sys/editpermission/" + rowData.pid, null, function (jsonObj) {
+                    if (jsonObj.Statu)
+                        $.procAjaxData(jsonObj);
+                    else
+                        $("#editWindow").html(jsonObj);
+                    
+                });
             }
 
         }
-        
+
         //新增按钮方法
-        function addRow()
-        {
+        function addRow() {
             $('#editWindow').window('open');
-            $("#editWindow").load("/admin/sys/addpermission/");
+            $.get("/admin/sys/addpermission/", null, function (jsonObj) {
+                if (jsonObj.Statu)
+                    $.procAjaxData(jsonObj);
+                else
+                    $("#editWindow").html(jsonObj);
+
+            });
 
         }
 
-        // submit the form
-        //$('#ff').submit();
+        //删除按钮方法
+        function removeRow() {
+            //获取选中行里的数据！
+            var rowData = $("#tbList").datagrid("getSelected");
+            if (rowData) {
+                $.post("/admin/sys/deletepermission", "id=" + rowData.pid, function (jsonObj) {
+                    $.procAjaxData(jsonObj, function () {
+                        $("#tbList").datagrid("reload");//删除成功后 刷新页面
+                    });
+                }, "JSON");
+            }
+
+        }
+            // submit the form
+            //$('#ff').submit();
     </script>
 </head>
 <body>

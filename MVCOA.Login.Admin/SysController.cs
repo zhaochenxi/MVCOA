@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 using MVCOA.Helper;
+using Common.Attributes;
 
 namespace MVCOA.Login.Admin
 {
@@ -45,7 +46,7 @@ namespace MVCOA.Login.Admin
             //2 生成规定格式的 json字符串发回 给 异步对象
             MODEL.EasyUIModel.DataGridModel dgModel = new MODEL.EasyUIModel.DataGridModel()
             {
-                total = list.Count(),
+                total = rowCount,
                 rows = list,
                 footer = null
             };
@@ -55,6 +56,7 @@ namespace MVCOA.Login.Admin
 
         #region 1.2 加载 权限修改 窗体html +EditPermission()
         [HttpGet]
+        [AjaxRequest]
         /// <summary>
         /// 1.2 加载 权限修改 窗体html
         /// </summary>
@@ -73,6 +75,7 @@ namespace MVCOA.Login.Admin
 
         #region 1.2 权限修改 +EditPermission(MODEL.ViewModel.Permission model)
         [HttpPost]
+        [AjaxRequest]
         /// <summary>
         /// 1.2 权限修改
         /// </summary>
@@ -90,6 +93,7 @@ namespace MVCOA.Login.Admin
 
         #region 1.3 新增权限 +AddPermission()
         [HttpPost]
+        [AjaxRequest]
         /// <summary>
         /// 新增权限
         /// </summary>
@@ -113,12 +117,28 @@ namespace MVCOA.Login.Admin
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [AjaxRequest]
         public ActionResult AddPermission()
         {
             SetDropDonwList();
             return PartialView("EditPermission");
         }
 
+        [HttpPost]
+        [AjaxRequest]
+        public ActionResult DeletePermission()
+        {
+            try
+            {
+                int id = int.Parse(Request.Form["id"]);
+                OperateContext.Current.BLLSession.IOu_PermissionBLL.DelBy(p => p.pid == id);
+                return OperateContext.Current.RedirectAjax("ok", "删除成功", null, "");
+            }
+            catch (Exception ex)
+            {
+                return OperateContext.Current.RedirectAjax("err","您现在删除的权限正在被角色使用，如果删除，请先移除所有相关角色的对此权限的使用", null, "");
+            }
+        }
 
         //------------------------------------------
         /// <summary>

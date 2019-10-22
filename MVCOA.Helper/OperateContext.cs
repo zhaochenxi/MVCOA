@@ -282,6 +282,7 @@ namespace MVCOA.Helper
             };
             JsonResult res = new JsonResult();
             res.Data = ajax;
+            res.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
             return res;
         }
         #endregion
