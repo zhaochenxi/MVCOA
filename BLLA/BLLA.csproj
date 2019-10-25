@@ -73,6 +73,10 @@
       <Project>{3b598d02-1de6-4220-b2a2-8de16908ca50}</Project>
       <Name>IDAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\IOC\IOC.csproj">
+      <Project>{5ae9b472-cd4d-44ca-a0ee-e55ae704f9b0}</Project>
+      <Name>IOC</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MODEL\MODEL.csproj">
       <Project>{cd8c3dc2-c7a5-47db-93dc-1adfde7c7171}</Project>
       <Name>MODEL</Name>

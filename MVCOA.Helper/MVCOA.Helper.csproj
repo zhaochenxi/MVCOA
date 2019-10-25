@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.9.4.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.9.4\lib\net45\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -62,10 +65,18 @@
       <Project>{19bbf931-9b15-499d-8f3c-5eca8a205d90}</Project>
       <Name>IBLL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\IOC\IOC.csproj">
+      <Project>{5ae9b472-cd4d-44ca-a0ee-e55ae704f9b0}</Project>
+      <Name>IOC</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MODEL\MODEL.csproj">
       <Project>{cd8c3dc2-c7a5-47db-93dc-1adfde7c7171}</Project>
       <Name>MODEL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

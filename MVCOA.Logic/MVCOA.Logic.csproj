@@ -56,6 +56,10 @@
       <Project>{19bbf931-9b15-499d-8f3c-5eca8a205d90}</Project>
       <Name>IBLL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\IOC\IOC.csproj">
+      <Project>{5ae9b472-cd4d-44ca-a0ee-e55ae704f9b0}</Project>
+      <Name>IOC</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MODEL\MODEL.csproj">
       <Project>{cd8c3dc2-c7a5-47db-93dc-1adfde7c7171}</Project>
       <Name>MODEL</Name>
@@ -64,6 +68,9 @@
       <Project>{0109f43a-079d-4a54-a2a2-88213c69f078}</Project>
       <Name>MVCOA.Helper</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

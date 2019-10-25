@@ -103,7 +103,8 @@ namespace MVCOA.Helper
         #region 0.2实例构造函数 初始化 业务仓储
         public OperateContext()
         {
-            BLLSession = DI.SpringHelper.GetObject<IBLL.IBLLSession>("BLLSession");
+            //BLLSession = DI.SpringHelper.GetObject<IBLL.IBLLSession>("BLLSession");
+            BLLSession = IOC.AutoFacHelper.Resolve<IBLL.IBLLSession>();
         }
         #endregion
 
